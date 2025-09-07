@@ -18,7 +18,7 @@ use pocketmine\Server;
 final class SetCommand extends BaseSubCommand {
 
     public function __construct(private Main $plugin) {
-        parent::__construct("set", "Set a Rank");
+        parent::__construct("set", "Mettre un grade à un joueur");
         $this->setPermission("rank.use");
     }
 

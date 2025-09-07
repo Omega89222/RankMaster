@@ -16,7 +16,7 @@ use pocketmine\player\Player;
 final class CreateCommand extends BaseSubCommand {
 
 	public function __construct(private Main $plugin) {
-		parent::__construct("create", "Create a Rank");
+		parent::__construct("create", "Créer un grade");
 		$this->setPermission("rank.use");
 	}
 

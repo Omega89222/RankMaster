@@ -16,7 +16,7 @@ use Omega892\RankManager;
 final class DeleteCommand extends BaseSubCommand {
 
     public function __construct(private Main $plugin) {
-        parent::__construct("delete", "Delete a Rank");
+        parent::__construct("delete", "Supprimer un grade");
         $this->setPermission("rank.use");
     }
 

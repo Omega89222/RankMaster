@@ -11,6 +11,7 @@ use Omega892\Commands\SubCommands\CreateCommand;
 use Omega892\Commands\SubCommands\SetCommand;
 use Omega892\Commands\SubCommands\ListCommand;
 use Omega892\Commands\SubCommands\DeleteCommand;
+use Omega892\Commands\SubCommands\HelpCommand;
 
 final class RankSubCommand extends BaseCommand {
 
@@ -26,6 +27,7 @@ final class RankSubCommand extends BaseCommand {
         $this->registerSubCommand(new SetCommand($this->plugin));
         $this->registerSubCommand(new ListCommand($this->plugin));
         $this->registerSubCommand(new DeleteCommand($this->plugin));
+        $this->registerSubCommand(new HelpCommand($this->plugin));
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {

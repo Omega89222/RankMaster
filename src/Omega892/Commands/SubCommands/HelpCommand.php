@@ -9,14 +9,14 @@ use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\BaseSubCommand;
 use CortexPE\Commando\constraint\InGameRequiredConstraint;
 use Omega892\Main;
+use Omega892\Form\RankForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use Omega892\RankManager;
 
-final class ListCommand extends BaseSubCommand {
+final class HelpCommand extends BaseSubCommand {
 
     public function __construct(private Main $plugin) {
-        parent::__construct("list", "Voir la list des grades");
+        parent::__construct("help", "Commandes de RankMaster");
         $this->setPermission("rank.use");
     }
 
@@ -25,16 +25,17 @@ final class ListCommand extends BaseSubCommand {
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
-        $rankManager = RankManager::getInstance();
-        $ranks = $rankManager->getAllRanks();
-        if (empty($ranks)) {
-            $sender->sendMessage("§cAucun grade trouvé.");
-        } else {
-            $sender->sendMessage("§eGrades disponibles: §a" . implode(", ", $ranks));
-        }
+        $helpMessage = implode("\n", [
+          "§eCommandes de §lRankMaster §e:",
+          "§a/rank create",
+          "/rank delete <rank>",
+          "/rank list",
+          "/rank set <player> <rank>"
+        ]);
+        $sender->sendMessage($helpMessage);
     }
 
-    public function getParent(): BaseCommand {
+    public function getParent() : BaseCommand {
         return $this->parent;
     }
 }
