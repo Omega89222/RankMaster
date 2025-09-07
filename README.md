@@ -1,8 +1,8 @@
 # RankMaster
 
 **TODO** 
+- [x] Help command
 - [ ] Permissions
-- [x] Help commande
 - [ ] Global form
 
 
@@ -11,3 +11,4 @@
 - /rank list
 - /rank delete <rankName>
 - /rank set <player> <rank>
+- /rank help
