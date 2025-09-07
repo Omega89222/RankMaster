@@ -1,9 +1,0 @@
-name: RankSystem
-author: Omega892
-api: 5.0.0
-version: 1.1.4
-main: Omega892\Rank\Main
-website: https://github.com/Omega89222
-permissions:
-    rank.use:
-         default: op
