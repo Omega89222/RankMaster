@@ -1,9 +1,9 @@
 # RankMaster
 
 **TODO** 
-- Permissions
-- Help commande
-- Global form
+- [ ] Permissions
+- [x] Help commande
+- [ ] Global form
 
 
 **Commands**
