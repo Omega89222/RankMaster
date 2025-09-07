@@ -1,0 +1,8 @@
+# ===============================
+# Config - RankMaster
+# ===============================
+
+only-ig: "§cCette commande doit être exécutée en jeu."
+no-perm: "§cTu n’as pas la permission d’utiliser cette commande."
+usage: "§eUtilisation: /rank <set|create|delete|list>"
+prefix: "§6[§eRankMaster§6] §r"

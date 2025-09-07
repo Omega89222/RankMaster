@@ -1,0 +1,8 @@
+name: RankMaster
+api: 5.0.0
+version: 1.0.0
+author: Omega892
+main: Omega892\Main
+permissions:
+     rank.use:
+        default: op
