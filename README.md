@@ -2,7 +2,7 @@
 
 **TODO** 
 - [x] Help command
-- [ ] Permissions
+- [x] Permissions
 - [ ] Global form
 
 
@@ -12,3 +12,4 @@
 - /rank delete <rankName>
 - /rank set <player> <rank>
 - /rank help
+- and other
