@@ -12,11 +12,12 @@ use Omega892\Main;
 use Omega892\Form\RankForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use Omega892\Form\GlobalForm;
 
-final class HelpCommand extends BaseSubCommand {
+final class FormCommand extends BaseSubCommand {
 
     public function __construct(private Main $plugin) {
-        parent::__construct("help", "Commandes de RankMaster");
+        parent::__construct("menu", "Commandes de RankMaster");
         $this->setPermission("rank.use");
     }
 
@@ -25,17 +26,6 @@ final class HelpCommand extends BaseSubCommand {
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
-        $helpMessage = implode("\n", [
-          "§eCommandes de §lRankMaster §e:",
-          "§a/rank create",
-          "/rank delete <rank>",
-          "/rank list",
-          "/rank set <player> <rank>"
-        ]);
-        $sender->sendMessage($helpMessage);
-    }
-
-    public function getParent() : BaseCommand {
-        return $this->parent;
+        GlobalForm::globalForm($sender);
     }
 }

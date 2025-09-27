@@ -27,7 +27,7 @@ class RankManager {
         }
 
         if (!$this->rankConfig->exists("default_rank")) {
-            $this->rankConfig->set("default_rank", "Player");
+            $this->createRank("default_rank", "§l§7Player", "§l§7Player");
         }
 
         $this->rankConfig->save();
@@ -104,6 +104,7 @@ class RankManager {
         return $this->rankConfig->get($rank, null);
     }
 
+
     public function getPrefix(Player $player): ?string {
         $rank = $this->getRank($player);
         if ($rank === null) return null;
@@ -136,15 +137,43 @@ class RankManager {
 
     public function setDefaultRank(string $rank): bool {
         if (!$this->rankConfig->exists($rank)) return false;
-
-        $this->rankConfig->set("default_rank", $rank);
+        $rankData = $this->rankConfig->get($rank);
+        if (!is_array($rankData)) return false;
+        $this->rankConfig->set("default_rank", $rankData);
         $this->rankConfig->save();
         return true;
     }
 
-    public function getDefaultRank(): ?string {
-        return $this->rankConfig->get("default_rank");
+
+    public function getDefaultRank(): ?array {
+        $data = $this->rankConfig->get("default_rank");
+        return is_array($data) ? $data : null;
     }
+
+    public function addPermissionAtRank(string $rank, string $permission): void {
+        if (!$this->rankConfig->exists($rank)) return;
+        $permissions = $this->rankConfig->getNested("$rank.permissions") ?? [];
+        if (!is_array($permissions)) {
+            $permissions = [];
+        }
+        if (!in_array($permission, $permissions)) {
+            $permissions[] = $permission;
+        }
+        $this->rankConfig->setNested("$rank.permissions", $permissions);
+        $this->rankConfig->save();
+    }
+
+    public function removePermissionAtRank(string $rank, string $permission): void {
+        if (!$this->rankConfig->exists($rank)) return;
+        $permissions = $this->rankConfig->getNested("$rank.permissions") ?? [];
+        if (!is_array($permissions)) return;
+        $permissions = array_filter($permissions, fn($perm) => $perm !== $permission);
+        $this->rankConfig->setNested("$rank.permissions", array_values($permissions));
+        $this->rankConfig->save();
+    }
+
+
+
     public function hasPermission(Player $player, string $permission): bool {
         $rank = strtolower($this->playerConfig->get(strtolower($player->getName())));
         $rankData = $this->rankConfig->get($rank);
@@ -172,7 +201,7 @@ class RankManager {
             unset($attachments[$name]);
         }
 
-        $attachment = $player->addAttachment(Server::getInstance()->getPluginManager()->getPlugin("HubBridge"));
+        $attachment = $player->addAttachment(Server::getInstance()->getPluginManager()->getPlugin("RankMaster"));
 
         $rank = $this->getRank($player);
         $rankData = $this->getRankData($rank);

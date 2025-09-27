@@ -29,22 +29,28 @@ final class SetCommand extends BaseSubCommand {
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
-    $targetName = $args["player"];
-    $rankName   = $args["rankName"];
+        $targetName = $args["player"];
+        $rankName   = $args["rankName"];
 
-    $target = $sender->getServer()->getPlayerExact($targetName);
+        $target = $sender->getServer()->getPlayerExact($targetName);
 
-    if ($target === null) {
-        $sender->sendMessage("§cLe joueur §e{$targetName} §cn’est pas en ligne.");
-        return;
+        if ($target === null) {
+            $sender->sendMessage("§cLe joueur §e{$targetName} §cn’est pas en ligne.");
+            return;
+        }
+
+        $rankManager = RankManager::getInstance();
+        $allRanks = $rankManager->getAllRanks();
+
+
+        $rankManager->addRank($target, $rankName);
+
+        $sender->sendMessage("§aVous avez ajouté le grade §e{$rankName} §aà §e{$target->getName()}§a !");
+        if ($target->isOnline()) {
+            $target->sendMessage("§aVous avez maintenant le grade §e{$rankName} §a!");
+        }
     }
 
-    $rankManager = RankManager::getInstance();
-    $rankManager->addRank($target, $rankName);
-
-    $sender->sendMessage("§aVous avez ajouté le grade §e{$rankName} §aà §e{$target->getName()}§a !");
-    $target->sendMessage("§aVous avez maintenant le grade §e{$rankName} §a!");
-}
 
     public function getParent(): BaseCommand {
         return $this->parent;

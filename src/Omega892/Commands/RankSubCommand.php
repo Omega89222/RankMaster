@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Omega892\Commands;
 
 use CortexPE\Commando\BaseCommand;
+use Omega892\Commands\SubCommands\FormCommand;
+use Omega892\Commands\SubCommands\ReloadPermCommand;
+use Omega892\Commands\SubCommands\SetDefaultRankCommand;
+use Omega892\Commands\SubCommands\SetPermRankCommand;
 use pocketmine\command\CommandSender;
 use Omega892\Main;
 use Omega892\Commands\SubCommands\CreateCommand;
@@ -28,6 +32,10 @@ final class RankSubCommand extends BaseCommand {
         $this->registerSubCommand(new ListCommand($this->plugin));
         $this->registerSubCommand(new DeleteCommand($this->plugin));
         $this->registerSubCommand(new HelpCommand($this->plugin));
+        $this->registerSubCommand(new FormCommand($this->plugin));
+        $this->registerSubCommand(new SetDefaultRankCommand($this->plugin));
+        $this->registerSubCommand(new SetPermRankCommand($this->plugin));
+        $this->registerSubCommand(new ReloadPermCommand($this->plugin));
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {

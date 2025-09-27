@@ -27,7 +27,7 @@ final class DeleteCommand extends BaseSubCommand {
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
         $rankManager = RankManager::getInstance();
-        $rank = $args[0];
+        $rank = $args["rank"];
         $rankManager->deleteRank($rank);
         $sender->sendMessage("§aVous avez supprimé le grade §e{$rank} §a!");
     }

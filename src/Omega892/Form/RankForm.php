@@ -26,4 +26,9 @@ class RankForm {
         $form->addInput("Prefix (dans le chat)", "§a§lStaff");
         $player->sendForm($form);
     }
+
+    public static function deleteRankForm(Player $player): void {}
+    public static function setRankForm(Player $player): void {}
+    public static function listRankForm(Player $player): void {}
+
 }

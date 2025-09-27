@@ -14,11 +14,17 @@ class RankEvents implements Listener {
         $player = $event->getPlayer();
         $name = $player->getName();
 
+        $rankPlayer = RankManager::getInstance()->getRank($player);
+        $defaultRank = RankManager::getInstance()->getDefaultRank();
+        if ($rankPlayer == null) {
+            RankManager::getInstance()->addRank($player, "default_rank");
+        }
         $prefix = RankManager::getInstance()->getNametag($player) ?? "";
         if ($prefix !== "") {
             $prefix .= " ";
         }
         $player->setNameTag("{$prefix}{$name}");
+        RankManager::getInstance()->updatePlayerPermissions($player);
     }
 
     public function onPlayerChat(PlayerChatEvent $event): void {
